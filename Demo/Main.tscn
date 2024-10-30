@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://ctfbt3o2fjqhg"]
 
-[ext_resource type="Script" path="res://Player.gd" id="1_xwu0c"]
+[ext_resource type="Script" path="res://Demo/Player.gd" id="1_3oej7"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qx03w"]
 
@@ -33,7 +33,7 @@ tonemap_mode = 2
 [node name="Node3D" type="Node3D"]
 
 [node name="Player" type="CharacterBody3D" parent="."]
-script = ExtResource("1_xwu0c")
+script = ExtResource("1_3oej7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

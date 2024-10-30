@@ -1,4 +1,4 @@
-extends Control
+class_name Health
 
 signal depleated
 signal damaged
