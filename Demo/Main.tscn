@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://ctfbt3o2fjqhg"]
+[gd_scene load_steps=14 format=3 uid="uid://ctfbt3o2fjqhg"]
 
 [ext_resource type="Script" path="res://Demo/Player.gd" id="1_3oej7"]
-[ext_resource type="PackedScene" uid="uid://ksxr3asubyrp" path="res://Health.tscn" id="2_ksbm2"]
+[ext_resource type="Script" path="res://Scripts/Health.gd" id="2_ujes6"]
+[ext_resource type="Script" path="res://Scripts/HealthRecharger.gd" id="3_cp25v"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qx03w"]
 
@@ -56,7 +57,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.893)
 fov = 122.586
 
-[node name="Health" parent="Player" instance=ExtResource("2_ksbm2")]
+[node name="Health" type="Node" parent="Player"]
+script = ExtResource("2_ujes6")
+
+[node name="Health Recharger" type="Node" parent="Player/Health"]
+script = ExtResource("3_cp25v")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, -0.5, 0)

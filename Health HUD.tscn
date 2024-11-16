@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cnnrkoy0bgui8"]
 
-[ext_resource type="Script" path="res://Health HUD.gd" id="1_wiq7e"]
+[ext_resource type="Script" path="res://Scripts/Health HUD.gd" id="1_wiq7e"]
 
 [node name="Health HUD" type="Control"]
 layout_mode = 3
