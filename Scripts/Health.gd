@@ -40,10 +40,7 @@ var current_health := max_health:
 				
 			value_changed.emit(current_health, value-current_health)
 
-func heal(value: float):
-	if healable:
-		current_health += value
-
-func damage(value: float):
-	if damageable:
-		current_health -= value
+func change_health(source: Hurtbox):
+	#checks if value is damage or healing and possible
+	if source.val < 0 and damageable or source.val >= 0 and healable:
+		current_health += source.val

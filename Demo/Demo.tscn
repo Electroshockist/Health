@@ -1,0 +1,162 @@
+[gd_scene load_steps=20 format=3 uid="uid://bo5rhxitushmh"]
+
+[ext_resource type="Script" path="res://Scripts/Health Modification/Hurtbox.gd" id="1_2sqwf"]
+[ext_resource type="Shape3D" uid="uid://dx2bw025cwclm" path="res://Demo/capsule.tres" id="1_g3nkl"]
+[ext_resource type="Script" path="res://Scripts/Health.gd" id="1_osebv"]
+[ext_resource type="Script" path="res://Demo/demo.gd" id="1_tf204"]
+[ext_resource type="Script" path="res://Scripts/Health Modification/HealthboxManager.gd" id="2_mbq7m"]
+[ext_resource type="Script" path="res://Scripts/Health Modification/Hitbox.gd" id="3_jpo3h"]
+[ext_resource type="PackedScene" uid="uid://dmk8b6832wgf6" path="res://Demo/control.tscn" id="6_2t6pd"]
+[ext_resource type="PackedScene" uid="uid://ctfbt3o2fjqhg" path="res://Demo/Health HUD.tscn" id="7_0opgn"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qtoyw"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_pwmkn"]
+sky_material = SubResource("ProceduralSkyMaterial_qtoyw")
+
+[sub_resource type="Environment" id="Environment_yfn1p"]
+background_mode = 2
+sky = SubResource("Sky_pwmkn")
+tonemap_mode = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gbsef"]
+size = Vector2(50, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vny1m"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_wxq3a"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_0dwom"]
+top_radius = 0.1
+bottom_radius = 0.1
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ivs6y"]
+radius = 0.1
+
+[sub_resource type="Animation" id="Animation_78186"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -1.5708, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_w5vni"]
+resource_name = "Swing"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -1.5708, 0), Vector3(0, 4.71239, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uxdct"]
+_data = {
+"RESET": SubResource("Animation_78186"),
+"Swing": SubResource("Animation_w5vni")
+}
+
+[node name="Demo" type="Node3D"]
+script = ExtResource("1_tf204")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_yfn1p")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World"]
+mesh = SubResource("PlaneMesh_gbsef")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/MeshInstance3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_vny1m")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = ExtResource("1_g3nkl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+mesh = SubResource("CapsuleMesh_wxq3a")
+skeleton = NodePath("../..")
+
+[node name="Hitbox" type="Area3D" parent="CharacterBody3D" node_paths=PackedStringArray("healthbox_manager")]
+script = ExtResource("3_jpo3h")
+healthbox_manager = NodePath("../HitboxManager")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/Hitbox"]
+shape = ExtResource("1_g3nkl")
+
+[node name="Health" type="Node" parent="CharacterBody3D"]
+script = ExtResource("1_osebv")
+max_health = 20.0
+
+[node name="HitboxManager" type="Node" parent="CharacterBody3D" node_paths=PackedStringArray("health")]
+script = ExtResource("2_mbq7m")
+health = NodePath("../Health")
+team = "Player"
+
+[node name="Entity" type="Node3D" parent="."]
+transform = Transform3D(-3.61999e-06, 0, -1, 0, 1, 0, 1, 0, -3.61999e-06, 2, 0, 0)
+script = ExtResource("2_mbq7m")
+team = "Enemy"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Entity"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -1, 1, 0)
+mesh = SubResource("CylinderMesh_0dwom")
+skeleton = NodePath("../..")
+
+[node name="Weapon" type="Area3D" parent="Entity/MeshInstance3D" node_paths=PackedStringArray("healthbox_manager")]
+monitorable = false
+script = ExtResource("1_2sqwf")
+healthbox_manager = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Entity/MeshInstance3D/Weapon"]
+shape = SubResource("CylinderShape3D_ivs6y")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Entity"]
+libraries = {
+"": SubResource("AnimationLibrary_uxdct")
+}
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 1, 5)
+fov = 34.3
+
+[node name="Control" parent="." instance=ExtResource("6_2t6pd")]
+
+[node name="HealthUI" parent="." instance=ExtResource("7_0opgn")]
+script = null
+
+[node name="ProgressBar" parent="HealthUI" index="0" node_paths=PackedStringArray("_health")]
+_health = NodePath("../../CharacterBody3D/Health")
+
+[connection signal="value_changed" from="CharacterBody3D/Health" to="HealthUI/ProgressBar" method="_on_health_value_changed"]
+[connection signal="button_down" from="Control/Button" to="." method="_on_button_button_down"]
+
+[editable path="Control"]
+[editable path="HealthUI"]

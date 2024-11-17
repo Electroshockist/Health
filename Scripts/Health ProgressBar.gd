@@ -1,5 +1,5 @@
 extends ProgressBar
-@onready var _health: Health = $"../Health"
+@export var _health: Health
 
 @onready var label: Label = $Label
 
@@ -9,7 +9,6 @@ func _ready():
 	value = _health.current_health
 	
 	updateUI(_health.current_health)
-
 
 func _on_health_value_changed(current_value: float, _change:float) -> void:
 	updateUI(current_value)
