@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ctfbt3o2fjqhg"]
 
-[ext_resource type="Script" path="res://Scripts/Health ProgressBar.gd" id="1_c1jfl"]
-[ext_resource type="Script" path="res://Demo/health_hud.gd" id="1_m1st1"]
+[ext_resource type="Script" path="res://Project/Health/Scripts/Health ProgressBar.gd" id="1_c1jfl"]
+[ext_resource type="Script" path="res://Project/Health/Demo/HealthHud.gd" id="1_m1st1"]
 
 [node name="HealthUI" type="Control"]
 layout_mode = 3

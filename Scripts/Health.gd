@@ -28,7 +28,6 @@ var current_health := max_health:
 	set(value):
 		if value != current_health:
 			current_health = value
-			print(current_health)
 			# Depletion
 			if current_health <= 0:
 				current_health = 0

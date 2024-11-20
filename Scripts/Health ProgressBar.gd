@@ -1,10 +1,10 @@
 extends ProgressBar
-@export var _health: Health
+@onready var _health: Health = $"..".health
 
 @onready var label: Label = $Label
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready():	
 	max_value = _health.max_health
 	value = _health.current_health
 	
