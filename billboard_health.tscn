@@ -1,7 +1,32 @@
-[gd_scene format=3 uid="uid://4r67u7ll77nr"]
+[gd_scene load_steps=3 format=3 uid="uid://4r67u7ll77nr"]
+
+[ext_resource type="Script" path="res://Project/Health/Scripts/Health ProgressBar.gd" id="1_7yl7y"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_kmoo1"]
+viewport_path = NodePath("SubViewport")
 
 [node name="BillboardHealth" type="Sprite3D"]
+billboard = 1
+texture = SubResource("ViewportTexture_kmoo1")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
+own_world_3d = true
+transparent_bg = true
+size = Vector2i(300, 30)
+
+[node name="ProgressBar" type="ProgressBar" parent="SubViewport"]
+layout_direction = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -15.0
+offset_right = 150.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+show_percentage = false
+script = ExtResource("1_7yl7y")

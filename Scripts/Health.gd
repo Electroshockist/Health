@@ -26,6 +26,7 @@ var current_health := max_health:
 		return current_health
 	
 	set(value):
+		var change = value-current_health
 		if value != current_health:
 			current_health = value
 			# Depletion
@@ -37,7 +38,7 @@ var current_health := max_health:
 				current_health = max_health
 				filled.emit()
 				
-			value_changed.emit(current_health, value-current_health)
+			value_changed.emit(current_health)
 
 func change_health(source: Hurtbox):
 	#checks if value is damage or healing and possible
