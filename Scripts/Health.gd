@@ -26,7 +26,7 @@ var current_health := max_health:
 		return current_health
 	
 	set(value):
-		var change = value-current_health
+		#var change = value-current_health
 		if value != current_health:
 			current_health = value
 			# Depletion
