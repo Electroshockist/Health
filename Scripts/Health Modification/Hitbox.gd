@@ -2,7 +2,7 @@
 class_name Hitbox
 extends Area3D
 
-@export var healthbox_manager: HealthboxManager
+@onready var healthbox_manager: HealthboxManager = owner.healthbox_manager
 
 func _ready() -> void:
 	add_to_group(healthbox_manager.team)
