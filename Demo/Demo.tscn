@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://Demo/demo.gd" id="1_tf204"]
 [ext_resource type="Script" path="res://Scripts/Health Modification/HealthboxManager.gd" id="2_mbq7m"]
 [ext_resource type="Script" path="res://Scripts/Health Modification/Hitbox.gd" id="3_jpo3h"]
-[ext_resource type="PackedScene" uid="uid://dmk8b6832wgf6" path="res://Demo/control.tscn" id="6_2t6pd"]
+[ext_resource type="PackedScene" uid="uid://dmk8b6832wgf6" path="res://Demo/Button.tscn" id="6_2t6pd"]
 [ext_resource type="PackedScene" uid="uid://ctfbt3o2fjqhg" path="res://Demo/Health HUD.tscn" id="7_0opgn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qtoyw"]
@@ -149,14 +149,9 @@ fov = 34.3
 
 [node name="Control" parent="." instance=ExtResource("6_2t6pd")]
 
-[node name="HealthUI" parent="." instance=ExtResource("7_0opgn")]
-script = null
+[node name="HealthUI" parent="." node_paths=PackedStringArray("health") instance=ExtResource("7_0opgn")]
+health = NodePath("../CharacterBody3D/Health")
 
-[node name="ProgressBar" parent="HealthUI" index="0" node_paths=PackedStringArray("_health")]
-_health = NodePath("../../CharacterBody3D/Health")
-
-[connection signal="value_changed" from="CharacterBody3D/Health" to="HealthUI/ProgressBar" method="_on_health_value_changed"]
 [connection signal="button_down" from="Control/Button" to="." method="_on_button_button_down"]
 
 [editable path="Control"]
-[editable path="HealthUI"]

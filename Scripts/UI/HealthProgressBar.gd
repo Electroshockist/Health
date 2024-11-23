@@ -1,7 +1,5 @@
 extends ProgressBar
-@export var _health: Health
-
-@onready var label: Label = $Label
+@onready var _health: Health = owner.health
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,4 +14,3 @@ func _on_health_value_changed(current_value: float) -> void:
 
 func updateUI(current_value: float):
 	value = current_value
-	label.text = "%10.2f"%current_value

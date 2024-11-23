@@ -1,5 +1,4 @@
-@tool
 class_name HealthHud
-extends Control
+extends Node
 
 @export var health: Health
