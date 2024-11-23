@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://ctfbt3o2fjqhg"]
 
-[ext_resource type="Script" path="res://Scripts/UI/HealthHud.gd" id="1_m1st1"]
-[ext_resource type="Script" path="res://Scripts/UI/HealthProgressBar.gd" id="2_ar0jp"]
-[ext_resource type="Script" path="res://Demo/HealthLabel.gd" id="3_g6oxg"]
+[ext_resource type="Script" path="res://Project/Health/Scripts/UI/HealthHud.gd" id="1_m1st1"]
+[ext_resource type="Script" path="res://Project/Health/Scripts/UI/HealthProgressBar.gd" id="2_ar0jp"]
+[ext_resource type="Script" path="res://Project/Health/Scripts/UI/HealthLabel.gd" id="3_g6oxg"]
 
 [node name="HealthUI" type="Control"]
 layout_mode = 3

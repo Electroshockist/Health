@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://4r67u7ll77nr"]
+[gd_scene load_steps=5 format=3 uid="uid://4r67u7ll77nr"]
 
-[ext_resource type="Script" path="res://Scripts/UI/HealthHud.gd" id="1_llkhm"]
-[ext_resource type="Script" path="res://Scripts/UI/HealthProgressBar.gd" id="2_j1rai"]
+[ext_resource type="Script" path="res://Project/Health/Scripts/UI/HealthHud.gd" id="1_llkhm"]
+[ext_resource type="Script" path="res://Project/Health/Scripts/UI/HealthProgressBar.gd" id="2_j1rai"]
+[ext_resource type="Script" path="res://Project/Health/Scripts/UI/HealthLabel.gd" id="3_nc0x6"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_kmoo1"]
 viewport_path = NodePath("SubViewport")
@@ -33,3 +34,9 @@ grow_horizontal = 2
 grow_vertical = 2
 show_percentage = false
 script = ExtResource("2_j1rai")
+
+[node name="Label" type="Label" parent="SubViewport/ProgressBar"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("3_nc0x6")
