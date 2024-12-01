@@ -6,6 +6,7 @@ extends Area3D
 
 func _ready() -> void:
 	add_to_group(healthbox_manager.team)
+	monitoring = false
 
-func on_hit(source:Hurtbox):
+func on_hit(source: Hurtbox):
 	healthbox_manager.health.change_health(source)
